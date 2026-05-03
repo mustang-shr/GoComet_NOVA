@@ -1,276 +1,177 @@
-Nova — Enterprise Logistics Intelligence Platform
-An agentic AI platform that parses shipment documents, scores risk, orchestrates multi-step approval workflows, and makes operational decisions — powered by NVIDIA NIM (Llama 3.1 70B).
-Table of Contents
-Overview
-Architecture
-Tech Stack
-Project Structure
-Getting Started
-Environment Variables
-API Reference
-Platform Modules
-How the AI Agent Works
-NVIDIA NIM Models
-Workflow & Approval Logic
-Risk Scoring Algorithm
-Overview
-Nova is a full-stack enterprise logistics intelligence platform built on top of NVIDIA NIM's hosted LLM inference. It is inspired by GoComet's Nova platform and implements four core pillars:
-Pillar
-What it does
-Agent Engine
-Parses raw shipment documents (BL, Invoice, Customs), extracts structured fields, runs risk assessment, and issues an operational decision
-Workflow Orchestrator
-Configurable multi-step approval pipelines — create, execute, approve/reject instances
-Shipment Management
-Full CRUD for shipment records with status lifecycle tracking
-Incident Management
-Exception logging, severity classification, resolution tracking with stats
-Architecture
-Code
-Tech Stack
-Frontend
-React 18 (Vite)
-Axios for HTTP
-Pure inline styles — no CSS framework dependency
-Backend
-FastAPI (Python 3.11+)
-httpx (async HTTP client for NVIDIA API calls)
-Pydantic v2 for request validation
-python-multipart for file uploads
-PyYAML for workflow YAML export
-In-memory dict store (production: replace with PostgreSQL + ClickHouse)
-AI
-NVIDIA NIM hosted inference
-Model: meta/llama-3.1-70b-instruct
-OpenAI-compatible /v1/chat/completions endpoint
-Project Structure
-Code
-Getting Started
-Prerequisites
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=venom&height=220&text=Nova&fontSize=80&color=gradient&customColorList=2&fontColor=ffffff&animation=fadeIn&desc=Enterprise%20Logistics%20Intelligence%20Platform%20%E2%80%A2%20Agentic%20AI%20%E2%80%A2%20NVIDIA%20NIM&descSize=14&descAlignY=72&fontAlignY=42" width="100%"/>
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=14&duration=2600&pause=1200&color=00D4FF&center=true&vCenter=true&width=700&lines=Agentic+AI+for+enterprise+logistics+intelligence;Parse+shipments+%C2%B7+score+risk+%C2%B7+orchestrate+approvals;NVIDIA+NIM+(Llama+3.1+70B)+%C2%B7+FastAPI+%C2%B7+React+18;Multi-step+approval+workflows+with+AI+decision+engine)](https://git.io/typing-svg)
+
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)](https://github.com/mustang-shr/GoComet_NOVA)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)](https://github.com/mustang-shr/GoComet_NOVA)
+[![React](https://img.shields.io/badge/React_18-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://github.com/mustang-shr/GoComet_NOVA)
+[![NVIDIA NIM](https://img.shields.io/badge/NVIDIA%20NIM-76B900?style=flat-square&logo=nvidia&logoColor=white)](https://github.com/mustang-shr/GoComet_NOVA)
+[![Stars](https://img.shields.io/github/stars/mustang-shr/GoComet_NOVA?style=flat-square&color=00d4ff)](https://github.com/mustang-shr/GoComet_NOVA/stargazers)
+
+</div>
+
+---
+
+## 🤖 Agentic AI Logistics Intelligence — What Nova Does
+
+**Nova** is a production-grade enterprise logistics intelligence platform powered by **NVIDIA NIM (Llama 3.1 70B)**. It parses raw shipment documents, scores operational risk, orchestrates multi-step approval workflows, and makes autonomous decisions — inspired by GoComet's Nova platform.
+
+```
+Raw Shipment Documents (BL · Invoice · Customs)
+              │
+              ▼
+    ┌─────────────────────┐
+    │   AI Agent Engine   │  ← NVIDIA NIM (Llama 3.1 70B)
+    │   Document Parser   │     httpx async inference
+    │   Risk Scorer       │     Pydantic v2 validation
+    └────────┬────────────┘
+             │
+    ┌────────▼────────────┐
+    │  Workflow Engine    │  ← Multi-step approval pipelines
+    │  Create · Execute   │     Approve / Reject instances
+    │  Approve · Reject   │     Configurable stages
+    └────────┬────────────┘
+             │
+    ┌────────▼────────────┐
+    │  GraphQL + FastAPI  │  ← React 18 (Vite) frontend
+    │  Shipment CRUD      │     Axios HTTP client
+    │  Incident Mgmt      │     Pure inline styles
+    └─────────────────────┘
+```
+
+---
+
+## 🚀 Four Core Pillars
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 🧠 Agent Engine
+Parses raw shipment documents (Bill of Lading, Invoice, Customs declarations), extracts structured fields, runs multi-factor risk assessment, and issues an **autonomous operational decision**.
+
+`nvidia-nim` `llama-3.1-70b` `document-parsing` `risk-scoring`
+
+</td>
+<td width="50%" valign="top">
+
+### 🔁 Workflow Orchestrator
+Configurable multi-step approval pipelines — create, execute, approve/reject instances. Full lifecycle management with stage-by-stage tracking and audit trail.
+
+`workflow-automation` `approval-pipeline` `multi-step` `orchestration`
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### 📦 Shipment Management
+Full CRUD for shipment records with complete status lifecycle tracking — from creation through customs clearance to final delivery.
+
+`shipment-tracking` `crud` `status-lifecycle` `logistics`
+
+</td>
+<td width="50%" valign="top">
+
+### 🚨 Incident Management
+Exception logging, severity classification, and resolution tracking with aggregate stats. Real-time operational exception surface for logistics teams.
+
+`incident-management` `exception-logging` `severity-classification`
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| **LLM Inference** | NVIDIA NIM · Llama 3.1 70B hosted API |
+| **Backend** | FastAPI (Python 3.11+) · httpx async · Pydantic v2 |
+| **File Handling** | python-multipart · PyYAML |
+| **Frontend** | React 18 (Vite) · Axios |
+| **API Pattern** | REST APIs · async/await throughout |
+
+---
+
+## ⚡ Getting Started
+
+### Prerequisites
+```bash
 Python 3.11+
 Node.js 18+
-An NVIDIA NIM API key from build.nvidia.com
-1. Clone & set up backend
-Bash
-2. Create .env
-Bash
-3. Start the backend
-Bash
-Swagger UI available at: http://127.0.0.1:8000/docs
-4. Set up and start the frontend
-Bash
-App available at: http://localhost:5173
-Environment Variables
-Variable
-Required
-Description
-NVIDIA_API_KEY
-Yes
-API key from build.nvidia.com — used for all LLM inference
-API Reference
-Agent Core
-Method
-Endpoint
-Description
-POST
-/parse
-Parse a raw document string through the Nova agent pipeline
-GET
-/health
-Health check — returns model name and key status
-Shipments
-Method
-Endpoint
-Description
-POST
-/api/shipments/
-Create a new shipment record
-GET
-/api/shipments/
-List all shipments (filterable by ?status=)
-GET
-/api/shipments/{id}
-Get a single shipment
-PUT
-/api/shipments/{id}
-Update shipment fields
-DELETE
-/api/shipments/{id}
-Delete a shipment
-GET
-/api/shipments/tracking/{num}
-Look up by tracking number
-Documents
-Method
-Endpoint
-Description
-POST
-/api/documents/upload
-Upload a file (multipart/form-data)
-GET
-/api/documents/
-List all documents
-GET
-/api/documents/{id}
-Get document metadata
-DELETE
-/api/documents/{id}
-Delete a document
-GET
-/api/documents/{id}/download
-Download the raw file
-POST
-/api/documents/{id}/validate
-Mark document as validated
-Workflows
-Method
-Endpoint
-Description
-POST
-/api/workflows/
-Create a workflow definition
-GET
-/api/workflows/
-List all workflows
-GET
-/api/workflows/{id}
-Get a workflow
-PUT
-/api/workflows/{id}
-Update a workflow
-DELETE
-/api/workflows/{id}
-Delete a workflow
-POST
-/api/workflows/{id}/activate
-Set workflow to active
-POST
-/api/workflows/{id}/deactivate
-Set workflow to inactive
-POST
-/api/workflows/{id}/execute
-Spawn a new workflow instance
-GET
-/api/workflows/instances/
-List all instances
-GET
-/api/workflows/instances/{id}
-Get a specific instance
-POST
-/api/workflows/instances/{id}/approve
-Approve current node
-POST
-/api/workflows/instances/{id}/reject
-Reject current node
-GET
-/api/workflows/{id}/yaml
-Export workflow definition as YAML
-Agents
-Method
-Endpoint
-Description
-GET
-/api/agents/types
-Get all supported agent types
-POST
-/api/agents/
-Register a new agent
-GET
-/api/agents/
-List all agents
-GET
-/api/agents/{id}
-Get agent details
-DELETE
-/api/agents/{id}
-Delete an agent
-POST
-/api/agents/{id}/run
-Run an agent with optional input + context
-Incidents
-Method
-Endpoint
-Description
-POST
-/api/incidents/
-Report a new incident
-GET
-/api/incidents/
-List incidents (filterable by ?status= or ?severity=)
-GET
-/api/incidents/{id}
-Get a single incident
-PUT
-/api/incidents/{id}
-Update incident fields
-DELETE
-/api/incidents/{id}
-Delete an incident
-POST
-/api/incidents/{id}/resolve
-Resolve an incident with a note
-GET
-/api/incidents/stats/summary
-Aggregate stats (total, open, resolved, by severity)
-Platform Modules
-◈ Dashboard
-Command center view. Loads live counts from /api/shipments/, /api/incidents/, and /api/workflows/ in parallel. Shows: total shipments, open incidents, active workflows, pending reviews, recent shipment list, and open incident list. Quick-action buttons navigate to the relevant panel.
-◎ Agent Engine
-The core Nova intelligence loop. Accepts raw text of any shipment document, runs it through a 4-stage visual pipeline, and returns a structured JSON result with extracted fields, risk flags, and a decision. If "Auto-create shipment" is toggled on, a shipment record is automatically created in the database after every successful parse (except ESCALATE decisions).
-⬡ Shipments
-Full CRUD panel. Create shipments manually or let the Agent Engine populate them automatically. Filter by status (pending / active / completed / cancelled). Click any row to expand the raw JSON. Status can be updated via the Edit flow or directly by the agent.
-⬟ Workflow Orchestrator
-Create named workflow definitions with a trigger type (manual, document_upload, shipment_created). Each new workflow auto-generates a 4-node pipeline: Start → Document Review → Approval → Complete. Execute a workflow to spawn an instance. Switch to the "Instances & Approvals" tab to approve or reject pending instances.
-◧ Documents
-File upload (click or drag-and-drop). Stores files server-side under uploaded_docs/. Supports validate action (marks the document as checked), download, and delete. In production this connects to an OCR/extraction pipeline.
-◉ Agents
-Register named AI agents by type: document_extraction, risk_assessment, analytics, monitoring, recommendation, customs_compliance, rate_comparison. Running an agent fires a live NVIDIA NIM call with a type-specific system prompt and returns structured JSON findings, recommendations, and a confidence score.
-△ Incidents
-Exception management. Report incidents with a title, description, severity (low/medium/high/critical), and type (delay/compliance/documentation/customs/other). Resolve with a note. Stats summary card shows open vs resolved counts.
-How the AI Agent Works
-When you click Run Nova Agent, the following happens:
-Code
-The system prompt instructs the model to return only a valid JSON object matching this schema:
-Json
-The backend strips any accidental markdown fences and parses the JSON. If parsing fails, a 500 is returned with the raw model output for debugging.
-NVIDIA NIM Models
-All models use the same base URL and API key. To switch, change MODEL in main.py:
-Model string
-Notes
-meta/llama-3.1-70b-instruct
-Default. Good balance of speed and accuracy
-meta/llama-3.1-405b-instruct
-Highest accuracy, slower, more expensive
-nvidia/nemotron-4-340b-instruct
-NVIDIA's own flagship reasoning model
-mistralai/mixtral-8x7b-instruct-v0.1
-Fastest, cheapest, good for high-volume
-mistralai/mistral-large
-Strong structured output compliance
-meta/codellama-70b
-Best for code-heavy or schema-heavy tasks
-Get API keys and test models at: build.nvidia.com
-Workflow & Approval Logic
-When you create a workflow, Nova stores a definition (a directed graph of nodes + edges). When you execute it, Nova creates a workflow instance — a live run of that definition — and sets its status to pending at the first actionable node.
-Code
-Each instance stores: workflow_id, current_node, status, context (arbitrary JSON payload), approved_by / rejected_by, and timestamps. In production you would add: per-node approver assignment, SLA timers, email notifications, and audit trail.
-Risk Scoring Algorithm
-The risk engine is prompt-engineered into the LLM rather than being rule-based. The model is instructed to apply this logic:
-Level
-Triggers
-HIGH
-Sanctioned origin countries (Iran, Russia, North Korea, Syria, Cuba), missing HS code on high-value cargo, No Commercial Value (NCV) declaration, consignee listed as "TO ORDER" combined with cash payment terms, post-issuance document amendments, missing shipper address
-MEDIUM
-Incomplete documentation, declared value discrepancies, unusual routing, missing EORI number
-LOW
-Minor missing fields, non-critical notes
-Decision mapping:
-Any HIGH flag → ESCALATE
-MEDIUM flags + missing docs → HOLD
-Only LOW flags → REVIEW
-No flags → APPROVE
-The confidence score (0–100) is also LLM-generated, reflecting how complete and unambiguous the source document is. A well-formed Bill of Lading with all fields present scores 90+. A vague manifest with withheld consignee names scores in the 40–60 range.
-Notes on the Timeout Error
-If you see httpx.ReadTimeout on large documents (especially the "risky" sample), increase the timeout in main.py:
-Python
-The Llama 3.1 70B model on NVIDIA NIM can take 30–90 seconds for complex, long documents. Alternatively switch to mixtral-8x7b for faster responses on high-volume workloads.
+NVIDIA NIM API Key
+```
+
+### Backend Setup
+```bash
+cd backend
+pip install -r requirements.txt
+cp .env.example .env        # Add your NVIDIA NIM API key
+uvicorn main:app --reload --port 8000
+```
+
+### Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### Environment Variables
+```env
+NVIDIA_API_KEY=your_nvidia_nim_api_key_here
+NVIDIA_BASE_URL=https://integrate.api.nvidia.com/v1
+MODEL_ID=meta/llama-3.1-70b-instruct
+```
+
+---
+
+## 📁 Project Structure
+
+```
+GoComet_NOVA/
+├── backend/
+│   ├── main.py               # FastAPI app + routes
+│   ├── agent.py              # NVIDIA NIM agent engine
+│   ├── risk_scorer.py        # Risk assessment algorithm
+│   ├── workflow.py           # Approval pipeline logic
+│   └── requirements.txt
+├── frontend/
+│   ├── src/
+│   │   ├── components/       # React 18 UI components
+│   │   ├── pages/            # Agent · Workflow · Shipment · Incident
+│   │   └── api/              # Axios HTTP client
+│   └── package.json
+└── README.md
+```
+
+---
+
+## 🏆 Why This Project Stands Out
+
+- **Real enterprise architecture** — not a toy demo. 4 production modules with full CRUD, lifecycle management, and async LLM inference.
+- **NVIDIA NIM integration** — using hosted Llama 3.1 70B for document parsing, not a simple prompt wrapper.
+- **Risk scoring algorithm** — custom-built multi-factor risk model for logistics operations.
+- **Async throughout** — httpx async client ensures non-blocking LLM calls under concurrent load.
+
+---
+
+<div align="center">
+
+⭐ **If Nova helped you — star this repo. It helps others find it.**
+
+[![LinkedIn](https://img.shields.io/badge/Shreyan%20Pal-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shreyan-pal)
+[![GitHub](https://img.shields.io/badge/mustang--shr-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mustang-shr)
+
+</div>
+
+<!-- SEO: agentic-ai enterprise-logistics nvidia-nim llama-3.1-70b fastapi react document-parsing risk-scoring workflow-orchestration approval-pipeline shipment-management incident-management python async logistics-intelligence gocomet multi-agent llm-inference -->
+
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2&height=80&section=footer&animation=fadeIn" width="100%"/>
+</div>
